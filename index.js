@@ -1,7 +1,8 @@
 import fetch from 'node-fetch';
 import btoa from 'btoa';
+import settings from './config.json';
 
-const credentials = '';
+const credentials = `${settings.username}:${settings.password}`;
 const jiraURL = 'https://vu-pmo.atlassian.net';
 
 function apiCall(call, data) {
