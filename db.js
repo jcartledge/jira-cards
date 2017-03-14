@@ -3,8 +3,8 @@ import DB from 'nedb';
 const db = new DB({filename: '.db', autoload: true});
 
 const save = (data) => {
-  data.ts = (new Date()).valueOf();
   console.dir(data);
+  data.ts = (new Date()).valueOf();
   db.insert(data);
 }
 const load = _ => {
