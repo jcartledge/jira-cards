@@ -5,7 +5,7 @@ import settings from './config.json';
 const credentials = `${settings.username}:${settings.password}`;
 const jiraURL = 'https://vu-pmo.atlassian.net';
 
-export default function jira(call, data) {
+export default function jira (call, data) {
   const request = {
     headers: {
       'Accept': 'application/json',
