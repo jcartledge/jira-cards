@@ -15,5 +15,7 @@ export default function jira (call, data) {
     method: 'post',
     body: JSON.stringify(data)
   };
+  console.log(`${jiraURL}/rest/api/2/${call}`);
+  console.log(data);
   return fetch(`${jiraURL}/rest/api/2/${call}`, request).then(response => response.json());
 }

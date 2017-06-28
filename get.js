@@ -1,6 +1,5 @@
 import {argv} from 'yargs';
 import jira from './jira';
-import {save} from './db';
 
 const search = (jql) => jira('search', {jql, maxResults: 500});
 const getIssues = (sprint, op = '=') => search(`sprint ${op} ${sprint} and project=PW`);
@@ -14,5 +13,5 @@ const hoursByState = (acc, {fields}) => {
 };
 
 // Hours by task state.
-const logHoursByState = ({issues}) => save(issues.reduce(hoursByState, {}));
+const logHoursByState = ({issues}) => console.dir(issues.reduce(hoursByState, {}));
 (argv.sprint ? getIssues(argv.sprint) : getCurrentIssues()).then(logHoursByState);

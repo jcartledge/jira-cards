@@ -4,7 +4,8 @@
   "description": "",
   "main": "scratch.js",
   "scripts": {
-    "get": "babel-node get.js --presets es2015,stage-2"
+    "get": "babel-node get.js --presets es2015,stage-2",
+    "users": "babel-node tasks-by-user.js --presets es2015,stage-2"
   },
   "author": "",
   "license": "ISC",
