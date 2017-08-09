@@ -1,5 +1,6 @@
 import {argv} from 'yargs';
 import jira from './jira';
+import chart from 'ascii-horizontal-barchart';
 
 const search = (jql) => jira('search', {jql, maxResults: 500});
 const getIssues = (sprint, op = '=') => search(`sprint ${op} ${sprint} and project=PW`);
@@ -12,6 +13,8 @@ const hoursByState = (acc, {fields}) => {
   return acc;
 };
 
-// Hours by task state.
-const logHoursByState = ({issues}) => console.dir(issues.reduce(hoursByState, {}));
-(argv.sprint ? getIssues(argv.sprint) : getCurrentIssues()).then(logHoursByState);
+const chartHoursByState = ({issues}) => {
+  console.log(chart(issues.reduce(hoursByState, {}), true));
+};
+
+(argv.sprint ? getIssues(argv.sprint) : getCurrentIssues()).then(chartHoursByState);
