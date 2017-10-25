@@ -34,7 +34,7 @@ const initialHoursByState = {
   'To Do': 0
 };
 const chartHoursByState = ({issues}) => {
-  console.log(chart(issues.reduce(hoursByState, initialHoursByState), {bar: '░'}));
+  console.log(chart(issues.reduce(hoursByState, initialHoursByState), {bar: '#'}));
 };
 
 const jql = argv.sprint ? getIssuesQuery(argv.sprint) : getCurrentIssuesQuery();
