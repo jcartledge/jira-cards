@@ -1,6 +1,6 @@
 import {argv} from 'yargs';
 import jira from './jira';
-import chart from 'ascii-horizontal-barchart';
+import chart from 'bars';
 
 async function search (jql) {
   const result = {};
@@ -24,8 +24,17 @@ const hoursByState = (acc, {fields}) => {
   return acc;
 };
 
+const initialHoursByState = {
+  'Abandoned': 0,
+  'Done': 0,
+  'In test': 0,
+  'Ready for test': 0,
+  'In review': 0,
+  'Work In Progress': 0,
+  'To Do': 0
+};
 const chartHoursByState = ({issues}) => {
-  console.log(chart(issues.reduce(hoursByState, {}), true));
+  console.log(chart(issues.reduce(hoursByState, initialHoursByState), {bar: '░'}));
 };
 
 const jql = argv.sprint ? getIssuesQuery(argv.sprint) : getCurrentIssuesQuery();

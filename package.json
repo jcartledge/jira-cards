@@ -21,7 +21,7 @@
     "simple-timeseries": "^1.0.0"
   },
   "dependencies": {
-    "ascii-horizontal-barchart": "^1.3.3",
+    "bars": "jstrace/bars",
     "yargs": "^7.0.1"
   }
 }
