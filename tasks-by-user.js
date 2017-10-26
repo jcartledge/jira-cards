@@ -1,11 +1,8 @@
 import {argv} from 'yargs';
-import jira from './jira';
+import {search, getIssuesQuery, getCurrentIssuesQuery} from './jira';
+import chart from 'bars';
 
-const search = (jql) => jira('search', {jql, maxResults: 500});
-const getIssues = (sprint, op = '=') => search(`sprint ${op} ${sprint} and project=PW`);
-const getCurrentIssues = () => getIssues('openSprints()', 'in');
 const getHours = (seconds) => seconds / 3600 || 0;
-
 const hoursByUser = (acc, {fields}) => {
   const assignee = (fields.assignee && fields.assignee.name) || 'unassigned';
   if (fields.timeoriginalestimate > 0 && fields.status.name !== 'Done') {
@@ -15,5 +12,6 @@ const hoursByUser = (acc, {fields}) => {
 };
 
 // Hours by task state.
-const logHoursByUser = ({issues}) => console.dir(issues.reduce(hoursByUser, {}));
-(argv.sprint ? getIssues(argv.sprint) : getCurrentIssues()).then(logHoursByUser);
+const chartHoursByUser = ({issues}) => console.log(chart(issues.reduce(hoursByUser, {})));
+const jql = argv.sprint ? getIssuesQuery(argv.sprint) : getCurrentIssuesQuery();
+search(jql).then(chartHoursByUser);

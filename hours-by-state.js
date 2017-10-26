@@ -1,21 +1,7 @@
 import {argv} from 'yargs';
-import jira from './jira';
+import {search, getIssuesQuery, getCurrentIssuesQuery} from './jira';
 import chart from 'bars';
 
-async function search (jql) {
-  const result = {};
-  const maxResults = 100;
-  let page = 0;
-  let response = {};
-  do {
-    response = await jira('search', {jql, maxResults, startAt: maxResults * page++});
-    result.issues = (result.issues || []).concat(response.issues || []);
-  } while (response.issues.length);
-  return result;
-}
-
-const getIssuesQuery = (sprint, op = '=') => `sprint ${op} ${sprint} and project=PW and issuetype in subTaskIssueTypes()`;
-const getCurrentIssuesQuery = () => getIssuesQuery('openSprints()', 'in');
 const getHours = (seconds) => seconds / 3600 || 0;
 
 const hoursByState = (acc, {fields}) => {

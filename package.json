@@ -4,10 +4,10 @@
   "description": "",
   "main": "scratch.js",
   "scripts": {
-    "watch": "watch -d -n30 yarn run get",
-    "get": "babel-node get.js --presets es2015,stage-2",
-    "users": "babel-node tasks-by-user.js --presets es2015,stage-2",
-    "report": "babel-node sprint-report.js --presets es2015,stage-2"
+    "watchHours": "watch -d -n30 yarn run hours",
+    "watchUsers": "watch -d -n30 yarn run users",
+    "hours": "babel-node hours-by-state.js --presets es2015,stage-2",
+    "users": "babel-node tasks-by-user.js --presets es2015,stage-2"
   },
   "author": "",
   "license": "ISC",
